@@ -37,7 +37,7 @@ export class MentionListItem extends React.PureComponent {
                         charStyles={styles.thumbnailChar} />
 
                     <View style={styles.text}>
-                        <Text style={styles.title}>{user.fullName}</Text>
+                        <Text style={styles.title}>{user.name}</Text>
                         <Text style={styles.username}>
                             @{user.username}
                         </Text>

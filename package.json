@@ -11,8 +11,15 @@
     "url": "git+https://github.com/mrazadar/react-native-mentions-editor.git"
   },
   "keywords": [
-    "react-component",
     "react-native",
+    "react-component",
+    "react-native-component",
+    "react",
+    "react native",
+    "mobile",
+    "ios",
+    "android",
+    "ui",
     "mentions",
     "textInput",
     "editor"

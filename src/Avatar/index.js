@@ -12,15 +12,15 @@ const alphabetColors = ['#FFD552', '#ffca0b', '#9C0D05', '#E1DB00', '#E99600', '
 const UserThumbnail = (props) => {
 
     const { user } = props;
-    let fullName = user && user.fullName;
-    if (!fullName || fullName === '') {
+    let name = user && user.name;
+    if (!name || name === '') {
         if (user && user.first_name && user.last_name) {
-            fullName = `${user.first_name} ${user.last_name}`
+            name = `${user.first_name} ${user.last_name}`
         } else {
             return null;
         }
     }
-    const text = getFirstChar(fullName);
+    const text = getFirstChar(name);
     const bgIndex = Math.floor((text.charCodeAt(0)) % alphabetColors.length);
     const bgColor = alphabetColors[bgIndex];
 
