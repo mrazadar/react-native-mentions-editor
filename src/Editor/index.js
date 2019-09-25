@@ -20,7 +20,7 @@ import MentionList from '../MentionList';
 export class Editor extends React.Component {
     static propTypes = {
         list: PropTypes.array,
-        message: PropTypes.string,
+        initialValue: PropTypes.string,
         clearInput: PropTypes.bool,
         onChange: PropTypes.func,
         showEditor: PropTypes.bool,
@@ -31,10 +31,17 @@ export class Editor extends React.Component {
 
     constructor(props) {
         super(props);
+        this.mentionsMap = new Map();
+        let msg = '' 
+        let formattedMsg = '' 
+        if(props.initialValue && (props.initialValue !== '')){
+            msg = props.initialValue; 
+            formattedMsg = this.formatTextWithMentions(props.initialValue); 
+        }
         this.state = {
             clearInput: props.clearInput,
-            inputText: '',
-            formattedText: '',
+            inputText: msg,
+            formattedText: formattedMsg,
             keyword: '',
             textInputHeight: "",
             isTrackingStarted: false,
@@ -50,7 +57,6 @@ export class Editor extends React.Component {
             editorHeight: 72,
             scrollContentInset: {top:0, bottom:0, left:0, right:0},
         };
-        this.mentionsMap = new Map();
         this.isTrackingStarted = false;
         this.previousChar = " ";
     }
@@ -482,7 +488,7 @@ export class Editor extends React.Component {
                                 selection={this.state.selection}
                                 selectionColor={'#000'}
                                 onSelectionChange={this.handleSelectionChange}
-                                placeholder="Type a message..."
+                                placeholder="Type something..."
                                 onContentSizeChange={this.onContentSizeChange}                                
                                 scrollEnabled={false}
                             />

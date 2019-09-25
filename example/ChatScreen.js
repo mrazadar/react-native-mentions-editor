@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   FlatList
 } from 'react-native'
-import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
@@ -56,8 +55,9 @@ class ChatScreen extends Component {
   constructor(props){
     super(props)
     this.state = {
+      initialValue: 'Something interested.',
       showEditor: true,      
-      message: '',
+      message: 'Inital message',
       messages: [],
       clearInput: false, 
       showMentions: false, /**use this parameter to programmatically trigger the mentionsList */
@@ -148,7 +148,7 @@ class ChatScreen extends Component {
             <View style={styles.footer}> 
               <Editor 
                 list={users} 
-                message={this.state.message}
+                initialValue={this.state.initialValue}
                 clearInput={this.state.clearInput}
                 onChange={this.onChangeHandler}
                 showEditor={this.state.showEditor}
@@ -169,14 +169,5 @@ class ChatScreen extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-  }
-}
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChatScreen)
+export default ChatScreen

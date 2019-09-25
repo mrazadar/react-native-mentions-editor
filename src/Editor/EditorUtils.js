@@ -2,6 +2,34 @@
  * EditorUtils contains helper 
  * functions for our Editor
 */
+
+export const displayTextWithMentions = (inputText, formatMentionNode) => {
+    if(inputText === '') return null;
+    const retLines = inputText.split("\n");
+    const formattedText = [];        
+    retLines.forEach((retLine, rowIndex) => {
+        const mentions = EU.findMentions(retLine);
+        if(mentions.length){
+            let lastIndex = 0
+            mentions.forEach((men, index) => {
+                const initialStr = retLine.substring(lastIndex, men.start);
+                lastIndex = (men.end+1);                    
+                formattedText.push(initialStr);
+                const formattedMention= formatMentionNode(`@${men.username}`, `${index}-${men.id}-${rowIndex}`);
+                formattedText.push(formattedMention);
+                if((mentions.length-1) === index){
+                    const lastStr = retLine.substr(lastIndex);//remaining string
+                    formattedText.push(lastStr);
+                }
+            });
+        }else{
+            formattedText.push(retLine);
+        }            
+        formattedText.push("\n");
+    });    
+    return formattedText;
+}
+
 export const EU = {
     specialTagsEnum: {
         mention: 'mention',
@@ -129,35 +157,8 @@ export const EU = {
          * previous prop
          */
         return next[key] && next[key] !== current[key];
-    },
-    
-    displayTextWithMentions : (inputText, formatMentionNode) => {
-        if(inputText === '') return null;
-        const retLines = inputText.split("\n");
-        const formattedText = [];        
-        retLines.forEach((retLine, rowIndex) => {
-            const mentions = EU.findMentions(retLine);
-            if(mentions.length){
-                let lastIndex = 0
-                mentions.forEach((men, index) => {
-                    const initialStr = retLine.substring(lastIndex, men.start);
-                    lastIndex = (men.end+1);                    
-                    formattedText.push(initialStr);
-                    const formattedMention= formatMentionNode(`@${men.username}`, `${index}-${men.id}-${rowIndex}`);
-                    formattedText.push(formattedMention);
-                    if((mentions.length-1) === index){
-                        const lastStr = retLine.substr(lastIndex);//remaining string
-                        formattedText.push(lastStr);
-                    }
-                });
-            }else{
-                formattedText.push(retLine);
-            }            
-            formattedText.push("\n");
-        });    
-        return formattedText;
-    }
-     
+    },    
+    displayTextWithMentions: displayTextWithMentions     
 }
 
 export default EU;
