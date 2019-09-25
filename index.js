@@ -1,3 +1,3 @@
 import Editor from './src/Editor';
-export * from './Editor/EditorUtils';
+export * from './src/Editor/EditorUtils';
 export default Editor;
