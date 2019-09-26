@@ -85,8 +85,20 @@ this.props.onChange({
 
 **`placholder: string`** Placholder for empty input. 
 
-**`renderMentionList: function`** If you want to render totally different list. You can use this property to provide alternative mention list renderer. 
+**`renderMentionList: function`** If you want to render totally different list. You can use this property to provide alternative mention list renderer. It will be called with certain properties to controll the functionality of list.
 
+```js
+renderMentionList Props: object
+
+ mentionListProps= {
+    list: props.list, //the default list you passed to this component
+    keyword: state.keyword, //keyword to filter the list. e.g. `@m`
+    isTrackingStarted: state.isTrackingStarted, // will be true if user started typing `@` 
+    onSuggestionTap: this.onSuggestionTap.bind(this), //this function should be called once user press on the list item
+    editorStyles: props.editorStyles, // these will be the props passed to the Editor component. 
+};
+
+```
 **`eidtorStyles: object`** This object will contain the overriding styles for different nodes. Check the below object to see how you can override styles. 
 
 ```js 
