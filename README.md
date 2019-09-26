@@ -66,14 +66,23 @@ this.props.onChange({
 ## Props
 
 `list: array` This should be the list of objects to be used as options for the mentions list. *Note* This must container `id` and `username` properties to uniqely identify object in the list. 
+
 `initialValue: string` Use this to initialize TextInput with the initial value. 
+
 `clearInput: bool` When true input will be clear automatically. 
+
 `onChange: function` This function will be called on input change event.  
+
 `showEditor: bool` Programmatically show/hide editor by using this property. 
+
 `toggleEditor: function` Use this to handle `blur` event on input. 
+
 `showMentions: bool` Use this property to programmatically trigger the `mentionsList` this will add `@` character in the value.
+
 `onHideMentions: function` This callback will be called when user stop tracking of mention. 
+
 `placholder: string` Placholder for empty input. 
+
 `eidtorStyles: object` This object will contain the overriding styles for different nodes. Check the below object to see how you can override styles. 
 
 ```js 
