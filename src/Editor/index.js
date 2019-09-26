@@ -26,7 +26,11 @@ export class Editor extends React.Component {
         showMentions: PropTypes.bool,
         onHideMentions: PropTypes.func,
         editorStyles: PropTypes.object, 
-        placeholder: PropTypes.placeholder
+        placeholder: PropTypes.placeholder,
+        renderMentionList: PropTypes.oneOfType([
+            PropTypes.func,
+            PropTypes.null,
+        ]),
     }
 
     constructor(props) {
@@ -461,15 +465,28 @@ export class Editor extends React.Component {
         
         if (!props.showEditor) return null;
         
+        const mentionListProps= {
+            list: props.list,
+            keyword: state.keyword,
+            isTrackingStarted: state.isTrackingStarted,
+            onSuggestionTap: this.onSuggestionTap.bind(this),
+            editorStyles,
+        };
+
         return (
             <View styles={editorStyles.mainContainer}>
-                <MentionList
-                    list={this.props.list}
-                    keyword={this.state.keyword}
-                    isTrackingStarted={this.state.isTrackingStarted}
-                    onSuggestionTap={this.onSuggestionTap}
-                    editorStyles={editorStyles}
-                />
+                {
+                    props.renderMentionList ?
+                    props.renderMentionList(mentionListProps) : (
+                        <MentionList
+                            list={props.list}
+                            keyword={state.keyword}
+                            isTrackingStarted={state.isTrackingStarted}
+                            onSuggestionTap={this.onSuggestionTap}
+                            editorStyles={editorStyles}
+                        />
+                    )
+                }
                 <View style={[styles.container, editorStyles.mainContainer]}>
 
                     <ScrollView ref={(scroll) => {this.scroll = scroll;}}

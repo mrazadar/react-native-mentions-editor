@@ -36,6 +36,7 @@ const users = [
     toggleEditor={this.toggleEditor}
     showMentions={this.state.showMentions}
     onHideMentions={this.onHideMentions}
+    ....
 />
 
 const formatMentionNode = (txt, key)=> (
@@ -83,6 +84,8 @@ this.props.onChange({
 **`onHideMentions: function`** This callback will be called when user stop tracking of mention. 
 
 **`placholder: string`** Placholder for empty input. 
+
+**`renderMentionList: function`** If you want to render totally different list. You can use this property to provide alternative mention list renderer. 
 
 **`eidtorStyles: object`** This object will contain the overriding styles for different nodes. Check the below object to see how you can override styles. 
 
