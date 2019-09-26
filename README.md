@@ -102,7 +102,7 @@ eidtorStyles: {
 
 ## Example 
 
-Check the example full example in  [/example](https://github.com/mrazadar/react-native-mentions-editor/example/index.js) folder
+Check out the full example in  [example](https://github.com/mrazadar/react-native-mentions-editor/tree/master/example) folder
 
 ## License
 
