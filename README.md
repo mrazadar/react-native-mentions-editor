@@ -12,13 +12,11 @@ or
 
 ## Demo
 
-![alt text](screens/m-zoom-speed-1.gif "Screenshots")
-![alt text](screens/m-zoom-speed-2.gif "Screenshots")
-
-
 ![alt text](screens/m1.gif "Screenshots")
 ![alt text](screens/m2.gif "Screenshots")
 ![alt text](screens/m3.gif "Screenshots")
+![alt text](screens/m-zoom-speed-1.gif "Screenshots")
+![alt text](screens/m-zoom-speed-2.gif "Screenshots")
 ![alt text](screens/m-zoom-speed-3.gif "Screenshots")
 
 ## Usage
