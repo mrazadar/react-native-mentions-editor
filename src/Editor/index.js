@@ -458,8 +458,9 @@ export class Editor extends React.Component {
     render() {
         const { props, state } = this;
         const {editorStyles = {}} = props;
+        
         if (!props.showEditor) return null;
-        // const {editorHeight} = this.state;
+        
         return (
             <View styles={editorStyles.mainContainer}>
                 <MentionList
@@ -467,7 +468,7 @@ export class Editor extends React.Component {
                     keyword={this.state.keyword}
                     isTrackingStarted={this.state.isTrackingStarted}
                     onSuggestionTap={this.onSuggestionTap}
-                    editorStyles={props.editorStyles}
+                    editorStyles={editorStyles}
                 />
                 <View style={[styles.container, editorStyles.mainContainer]}>
 

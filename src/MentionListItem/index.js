@@ -15,6 +15,7 @@ export class MentionListItem extends React.PureComponent {
     static propTypes = {
         item: PropTypes.object,
         onSuggestionTap: PropTypes.func,
+        editorStyles: PropTypes.object,
     }
  
     onSuggestionTap = (user, hidePanel) => {
@@ -23,7 +24,7 @@ export class MentionListItem extends React.PureComponent {
 
 
     render (){
-        const { item: user, index } = this.props;
+        const { item: user, index, editorStyles } = this.props;
         return (
             <View >
                 <TouchableOpacity

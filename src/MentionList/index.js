@@ -50,7 +50,7 @@ export class MentionList extends React.PureComponent {
             return null
         }
         return (
-            <Animated.View style={[{ ...styles.suggestionsPanelStyle }, editorStyles.mentionsListWrapper]}>
+            <Animated.View style={[{ ...styles.suggestionsPanelStyle }, this.props.editorStyles.mentionsListWrapper]}>
                 <FlatList
                     style={styles.mentionsListContainer}
                     keyboardShouldPersistTaps={"always"}
