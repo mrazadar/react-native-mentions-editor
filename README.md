@@ -12,8 +12,9 @@ or
 
 ## Demo
 
-![alt text](screens/mention1.gif "Screenshots")
-![alt text](screens/mention2.gif "Screenshots")
+![alt text](screens/m1.gif "Screenshots")
+![alt text](screens/m2.gif "Screenshots")
+![alt text](screens/m3.gif "Screenshots")
 
 ## Usage
 
