@@ -12,6 +12,9 @@ or
 
 ## Demo
 
+![alt text](screens/m-cut-1.gif "Screenshots")
+![alt text](screens/m-cut-2.gif "Screenshots")
+![alt text](screens/m-cut-3.gif "Screenshots")
 ![alt text](screens/m1.gif "Screenshots")
 ![alt text](screens/m2.gif "Screenshots")
 ![alt text](screens/m3.gif "Screenshots")
@@ -51,7 +54,8 @@ const formatMentionNode = (txt, key)=> (
 ```
 ## How it works 
 
-This component used special mark-up `@[username](id:1)` to differentiate mentions in the input value. 
+This component allows you to @mention anywhere in the input value. (Not possible using [react-native-mentions](https://github.com/harshq/react-native-mentions)). 
+Work nicely with selection and highlight of text. This component used special mark-up `@[username](id:1)` to differentiate mentions in the input value. 
 Whenever input value change the `onChange` callback will be called, with an object containing two properties. 
 
 ```js 
