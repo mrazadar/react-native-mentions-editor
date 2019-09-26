@@ -22,7 +22,7 @@ or
 ## Usage
 
 ```js
-import Editor, {displayTextWithMentions} from 'react-native-mentions-editor';
+import Editor, { displayTextWithMentions} from 'react-native-mentions-editor';
 const users = [ 
     { "id": 1, "name": "Raza Dar", "username": "mrazadar", "gender": "male"},
     { "id": 3, "name": "Atif Rashid", "username": "atif.rashid", "gender": "male"},
@@ -68,6 +68,38 @@ this.props.onChange({
 `displayText` Will have raw text user will see on the screen. You can see that in the comment. 
 `text` Will have formatted text with some markup to parse mentions on the server and other clients. There is a function called `displayTextWithMentions` you can use this function to parse this mark-up with the parser function (Which format the mention node according to formatter function. Check the example app). 
 
+If you want to only parse mentions in the string but don't want to format them you can use this `EditorUtils.findMentions` function to actually parse the mentions in the string. 
+This will parse special mark `@[username](id:1)` and gives you the exact `positions` and `username` and `id` for that mention. Which you can use for tagging / emailing purposes on the server etc.
+You can use this function by importing: 
+
+
+```js
+import { EU as EditorUtils } from 'react-native-mentions-editor';
+EditorUtils.findMentions("Hey @[mrazadar](id:1) this is good work" );
+
+//Check the definition of this function
+findMentions: (val) => {
+    /**
+     * Both Mentions and Selections are 0-th index based in the strings
+     * meaning their indexes in the string start from 0
+     * findMentions finds starting and ending positions of mentions in the given text
+     * @param val string to parse to find mentions
+     * @returns list of found mentions 
+     */
+    let reg = /@\[([^\]]+?)\]\(id:([^\]]+?)\)/igm;
+    let indexes = [];
+    while (match = reg.exec(val)) {
+        indexes.push({
+            start: match.index, 
+            end: (reg.lastIndex-1),
+            username: match[1],
+            userId: match[2],
+            type: EU.specialTagsEnum.mention
+        });
+    }
+    return indexes;
+},
+```
 
 ## Props {property : type}
 
