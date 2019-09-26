@@ -1,6 +1,6 @@
 # react-native-mentions-editor [![npm version](https://badge.fury.io/js/react-native-mentions-editor.svg)](https://badge.fury.io/js/react-native-mentions-editor)
-Mentions textbox for React Native. Tested on iOS and should work on Android as well. Because it's a plain Javascript base solution with some react-native input support. 
-Required react-native version >= 0.59   - Inspiration [react-native-mentions](https://github.com/harshq/react-native-mentions)
+Mentions TextInput for React Native. Tested on iOS and should work on Android as well. Because it's a plain Javascript base solution with some react-native TextInput support. 
+ - Inspiration [react-native-mentions](https://github.com/harshq/react-native-mentions)
 
 
 ## Installation
@@ -102,11 +102,7 @@ eidtorStyles: {
 
 ## Example 
 
-Check full example in the `example` folder. 
-
-## react-Native version support ( >= 0.59 )
-
-- This library only supports RN > 0.58 and above due to `react-native/TextInput.onSelectionChange` function support. Check the example [here](https://github.com/mrazadar/react-native-mentions-editor/example/index.js)
+Check the example full example in  [/example](https://github.com/mrazadar/react-native-mentions-editor/example/index.js) folder
 
 ## License
 

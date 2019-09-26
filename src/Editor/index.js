@@ -14,8 +14,6 @@ import EU from './EditorUtils';
 import styles from './EditorStyles';
 import MentionList from '../MentionList';
 
-// import { whenTrue } from '../../../../utils'
-
 
 export class Editor extends React.Component {
     static propTypes = {
