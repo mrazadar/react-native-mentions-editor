@@ -65,7 +65,7 @@ this.props.onChange({
 
 ## Props
 
-`list: array` This should be the list of objects to be used as options for the mentions list. *Note* This must container `id` and `username` properties to uniqely identify object in the list. 
+`list: array` This should be the list of objects to be used as options for the mentions list. **Note** This must container `id` and `username` properties to uniqely identify object in the list. 
 
 `initialValue: string` Use this to initialize TextInput with the initial value. 
 
