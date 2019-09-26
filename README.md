@@ -63,27 +63,27 @@ this.props.onChange({
 `text` Will have formatted text with some markup to parse mentions on the server and other clients. There is a function called `displayTextWithMentions` you can use this function to parse this mark-up with the parser function (Which format the mention node according to formatter function. Check the example app). 
 
 
-## Props
+## Props {property : type}
 
 **`list: array`** This should be the list of objects to be used as options for the mentions list. **Note** This must contain `id` and `username` properties to uniqely identify object in the list. 
 
-`initialValue: string` Use this to initialize TextInput with the initial value. 
+**`initialValue: string`** Use this to initialize TextInput with the initial value. 
 
-`clearInput: bool` When true input will be clear automatically. 
+**`clearInput: bool`** When true input will be clear automatically. 
 
-`onChange: function` This function will be called on input change event.  
+**`onChange: function`** This function will be called on input change event.  
 
-`showEditor: bool` Programmatically show/hide editor by using this property. 
+**`showEditor: bool`** Programmatically show/hide editor by using this property. 
 
-`toggleEditor: function` Use this to handle `blur` event on input. 
+**`toggleEditor: function`** Use this to handle `blur` event on input. 
 
-`showMentions: bool` Use this property to programmatically trigger the `mentionsList` this will add `@` character in the value.
+**`showMentions: bool`** Use this property to programmatically trigger the `mentionsList` this will add `@` character in the value.
 
-`onHideMentions: function` This callback will be called when user stop tracking of mention. 
+**`onHideMentions: function`** This callback will be called when user stop tracking of mention. 
 
-`placholder: string` Placholder for empty input. 
+**`placholder: string`** Placholder for empty input. 
 
-`eidtorStyles: object` This object will contain the overriding styles for different nodes. Check the below object to see how you can override styles. 
+**`eidtorStyles: object`** This object will contain the overriding styles for different nodes. Check the below object to see how you can override styles. 
 
 ```js 
 eidtorStyles: {
