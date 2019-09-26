@@ -25,10 +25,10 @@ export class MentionListItem extends React.PureComponent {
     render (){
         const { item: user, index } = this.props;
         return (
-            <View>
+            <View >
                 <TouchableOpacity
                     activeOpacity={0.8}
-                    style={styles.suggestionItem}
+                    style={[styles.suggestionItem, editorStyles.mentionListItemWrapper]}
                     onPress={() => this.onSuggestionTap(user)}>
 
                     <Avatar
@@ -36,9 +36,9 @@ export class MentionListItem extends React.PureComponent {
                         wrapperStyles={styles.thumbnailWrapper}
                         charStyles={styles.thumbnailChar} />
 
-                    <View style={styles.text}>
-                        <Text style={styles.title}>{user.name}</Text>
-                        <Text style={styles.username}>
+                    <View style={[styles.text, editorStyles.mentionListItemTextWrapper]}>
+                        <Text style={[styles.title, editorStyles.mentionListItemTitle]}>{user.name}</Text>
+                        <Text style={[styles.username, editorStyles.mentionListItemUsername]}>
                             @{user.username}
                         </Text>
                     </View>

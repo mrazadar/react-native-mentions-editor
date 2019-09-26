@@ -10,8 +10,6 @@ export default StyleSheet.create({
         justifyContent: 'center'
     },
     name: {
-        // alignSelf: 'center',
-        // ...Fonts.style.interSemiBold16,
         fontWeight: 'bold',
         fontSize: 16,
         color: "#fff",

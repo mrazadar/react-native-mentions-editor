@@ -49,7 +49,7 @@ const formatMentionNode = (txt, key)=> (
 ```
 ## How it works 
 
-This component used special mark-up `@[username](id:1)` to differentiate mentions in the string. 
+This component used special mark-up `@[username](id:1)` to differentiate mentions in the input value. 
 Whenever input value change the `onChange` callback will be called, with an object containing two properties. 
 
 ```js 
@@ -60,13 +60,12 @@ this.props.onChange({
 ```
 
 `displayText` Will have raw text user will see on the screen. You can see that in the comment. 
-`text` Will have formatted text with some markup to parse mentions on the server and other clients. There is a function called `displayTextWithMentions` you can use this function to parse this mark-up to human readable way. 
- 
-` 
+`text` Will have formatted text with some markup to parse mentions on the server and other clients. There is a function called `displayTextWithMentions` you can use this function to parse this mark-up with the parser function (Which format the mention node according to formatter function. Check the example app). 
+
 
 ## Props
 
-`list: array` This should be the list of objects to be used as options for the mentions list. 
+`list: array` This should be the list of objects to be used as options for the mentions list. *Note* This must container `id` and `username` properties to uniqely identify object in the list. 
 `initialValue: string` Use this to initialize TextInput with the initial value. 
 `clearInput: bool` When true input will be clear automatically. 
 `onChange: function` This function will be called on input change event.  
@@ -74,7 +73,23 @@ this.props.onChange({
 `toggleEditor: function` Use this to handle `blur` event on input. 
 `showMentions: bool` Use this property to programmatically trigger the `mentionsList` this will add `@` character in the value.
 `onHideMentions: function` This callback will be called when user stop tracking of mention. 
+`placholder: string` Placholder for empty input. 
+`eidtorStyles: object` This object will contain the overriding styles for different nodes. Check the below object to see how you can override styles. 
 
+```js 
+eidtorStyles: {
+    mainContainer: {}, 
+    editorContainer: {...}, 
+    inputMaskTextWrapper: {},
+    inputMaskText: {},
+    input: {},
+    mentionsListWrapper:{},
+    mentionListItemWrapper: {} 
+    mentionListItemTextWrapper: {},
+    mentionListItemTitle: {}
+    mentionListItemUsername: {}
+}
+```
 
 ## Example 
 

@@ -6,8 +6,6 @@ export default StyleSheet.create({
         maxHeight: 300,
     },
     suggestionsPanelStyle: {
-        // borderBottomWidth: 1, 
-        // borderColor: Colors.$black05,
     },
     loaderContainer: {
 

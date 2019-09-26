@@ -15,6 +15,7 @@ import styles from './MentionListStyles';
 export class MentionList extends React.PureComponent {
     static propTypes = {
         list: PropTypes.array,
+        editorStyles: PropTypes.object,
         isTrackingStarted: PropTypes.bool,
         suggestions: PropTypes.array,
         keyword: PropTypes.string,
@@ -28,7 +29,13 @@ export class MentionList extends React.PureComponent {
 
 
     renderSuggestionsRow = ({ item }) => {
-        return ( <MentionListItem onSuggestionTap={this.props.onSuggestionTap} item={item} /> )
+        return ( 
+            <MentionListItem 
+                onSuggestionTap={this.props.onSuggestionTap} 
+                item={item} 
+                editorStyles={this.props.editorStyles}
+            /> 
+        )
     }
     render() {
         const { props } = this;
@@ -43,7 +50,7 @@ export class MentionList extends React.PureComponent {
             return null
         }
         return (
-            <Animated.View style={[{ ...styles.suggestionsPanelStyle }]}>
+            <Animated.View style={[{ ...styles.suggestionsPanelStyle }, editorStyles.mentionsListWrapper]}>
                 <FlatList
                     style={styles.mentionsListContainer}
                     keyboardShouldPersistTaps={"always"}

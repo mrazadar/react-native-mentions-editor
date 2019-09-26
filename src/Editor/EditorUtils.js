@@ -4,6 +4,9 @@
 */
 
 export const displayTextWithMentions = (inputText, formatMentionNode) => {
+    /**
+     * Use this function to parse mentions markup @[username](id) in the string value. 
+     */
     if(inputText === '') return null;
     const retLines = inputText.split("\n");
     const formattedText = [];        

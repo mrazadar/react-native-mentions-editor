@@ -27,6 +27,8 @@ export class Editor extends React.Component {
         toggleEditor: PropTypes.func,
         showMentions: PropTypes.bool,
         onHideMentions: PropTypes.func,
+        editorStyles: PropTypes.object, 
+        placeholder: PropTypes.placeholder
     }
 
     constructor(props) {
@@ -56,6 +58,7 @@ export class Editor extends React.Component {
             showMentions: false,
             editorHeight: 72,
             scrollContentInset: {top:0, bottom:0, left:0, right:0},
+            placeholder: props.placeholder || "Type something..."
         };
         this.isTrackingStarted = false;
         this.previousChar = " ";
@@ -456,28 +459,39 @@ export class Editor extends React.Component {
 
     render() {
         const { props, state } = this;
+        const {editorStyles = {}} = props;
         if (!props.showEditor) return null;
         // const {editorHeight} = this.state;
         return (
-            <View>
+            <View styles={editorStyles.mainContainer}>
                 <MentionList
                     list={this.props.list}
                     keyword={this.state.keyword}
                     isTrackingStarted={this.state.isTrackingStarted}
                     onSuggestionTap={this.onSuggestionTap}
+                    editorStyles={props.editorStyles}
                 />
-                <View style={[styles.container]}>
+                <View style={[styles.container, editorStyles.mainContainer]}>
 
                     <ScrollView ref={(scroll) => {this.scroll = scroll;}}
                                  onContentSizeChange = {() => {this.scroll.scrollToEnd({animated: true})}}
-                                 style={styles.textContainer}>
+                                 style={[styles.editorContainer, editorStyles.editorContainer]}>
                         <View style={[{ height: this.state.editorHeight }]}>
-                            <View style={styles.formmatedTextWrapper}>
-                                <Text style={styles.formmatedText}>{state.formattedText}</Text>
+                            <View style={[styles.formmatedTextWrapper, editorStyles.inputMaskTextWrapper]}>
+                                {
+                                    state.formattedText !== "" ?
+                                    <Text style={[styles.formmatedText, editorStyles.inputMaskText]}>
+                                        {state.formattedText}
+                                    </Text>
+                                    : 
+                                    <Text style={[styles.placeholderText, editorStyles.placeholderText]}> 
+                                        {state.placeholder}
+                                    </Text>
+                                }
                             </View>
                             <TextInput
                                 ref={input => props.onRef && props.onRef(input)}
-                                style={[styles.input]}
+                                style={[styles.input, editorStyles.input]}
                                 multiline
                                 autoFocus
                                 numberOfLines={100}
