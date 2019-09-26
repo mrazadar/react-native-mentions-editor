@@ -1,6 +1,6 @@
 # react-native-mentions-editor [![npm version](https://badge.fury.io/js/react-native-mentions-editor.svg)](https://badge.fury.io/js/react-native-mentions-editor)
 Mentions textbox for React Native. Tested on iOS and should work on Android as well. Because it's a plain Javascript base solution with some react-native input support. 
-Required react-native version >= 0.59   
+Required react-native version >= 0.59   - Inspiration [react-native-mentions](https://github.com/harshq/react-native-mentions)
 
 
 ## Installation
