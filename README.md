@@ -103,10 +103,10 @@ renderMentionList Props: object
 };
 
 ```
-**`eidtorStyles: object`** This object will contain the overriding styles for different nodes. Check the below object to see how you can override styles. 
+**`editorStyles: object`** This object will contain the overriding styles for different nodes. Check the below object to see how you can override styles. 
 
 ```js 
-eidtorStyles: {
+editorStyles: {
     mainContainer: {}, 
     editorContainer: {...}, 
     inputMaskTextWrapper: {},
