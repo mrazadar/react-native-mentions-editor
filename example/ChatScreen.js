@@ -16,34 +16,13 @@ import EU from '../Components/TextEditor/EditorUtils'
 // Styles
 import styles from './Styles/ChatScreenStyles'
 
-
-const users = [
-  {
-    "id": 1,
-    "name": "Raza Dar",
-    "username": "mrazadar",
-    "gender": "male",
-  },
-  {
-    "id": 2,
-    "name": "Tim Pan",
-    "username": "tim.pan",
-    "gender": "male",
-  },
-  {
-    "id": 3,
-    "name": "Taimoor Khan",
-    "username": "taimoor.khan",
-    "gender": "male",
-  },
-  {
-    "id": 4,
-    "name": "Meesha Shafi",
-    "username": "meesha.shafi",
-    "gender": "female",
-  }
-]
-
+const users = [ 
+  { "id": 1, "name": "Raza Dar", "username": "mrazadar", "gender": "male"},
+  { "id": 3, "name": "Atif Rashid", "username": "atif.rashid", "gender": "male"},
+  { "id": 4, "name": "Peter Pan", "username": "peter.pan", "gender": "male"},
+  { "id": 5, "name": "John Doe", "username": "john.doe", "gender": "male"}, 
+  { "id": 6, "name": "Meesha Shafi", "username": "meesha.shafi", "gender": "female"}
+];
 
 const formatMentionNode = (txt, key)=> (
   <Text key={key} style={styles.mention}>
