@@ -18,7 +18,7 @@ export const displayTextWithMentions = (inputText, formatMentionNode) => {
                 const initialStr = retLine.substring(lastIndex, men.start);
                 lastIndex = (men.end+1);                    
                 formattedText.push(initialStr);
-                const formattedMention= formatMentionNode(`@${men.username}`, `${index}-${men.id}-${rowIndex}`);
+                const formattedMention= formatMentionNode(`@${men.username}`, `${index}-${men.userId}-${rowIndex}`);
                 formattedText.push(formattedMention);
                 if((mentions.length-1) === index){
                     const lastStr = retLine.substr(lastIndex);//remaining string
