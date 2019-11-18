@@ -26,11 +26,8 @@ export class Editor extends React.Component {
         showMentions: PropTypes.bool,
         onHideMentions: PropTypes.func,
         editorStyles: PropTypes.object, 
-        placeholder: PropTypes.placeholder,
-        renderMentionList: PropTypes.oneOfType([
-            PropTypes.func,
-            PropTypes.null,
-        ]),
+        placeholder: PropTypes.string,
+        renderMentionList: PropTypes.func,
     }
 
     constructor(props) {
