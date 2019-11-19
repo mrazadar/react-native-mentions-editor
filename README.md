@@ -119,7 +119,7 @@ findMentions: (val) => {
 
 **`onHideMentions: function`** This callback will be called when user stop tracking of mention. 
 
-**`placholder: string`** Placholder for empty input. 
+**`placeholder: string`** placeholder for empty input. 
 
 **`renderMentionList: function`** If you want to render totally different list. You can use this property to provide alternative mention list renderer. It will be called with certain properties to controll the functionality of list.
 
