@@ -126,6 +126,48 @@ export const EU = {
     sum: (x,y) => (x+y),
     diff: (x,y) => Math.abs(x - y),
     isEmpty: str => (str === ''),
+    getMentionsWithInputText:  (inputText) => {
+         /**
+         * populate mentions map 
+         * update str to consider this mentions map.
+         */        
+        const map = new Map();
+        let newValue = '';
+
+        if(inputText === '') return null;
+        const retLines = inputText.split("\n");
+
+        retLines.forEach((retLine, rowIndex) => {
+            const mentions = EU.findMentions(retLine);
+            if(mentions.length){
+                let lastIndex = 0
+                mentions.forEach((men, index) => {
+                    newValue = newValue.concat(retLine.substring(lastIndex, men.start));
+                    lastIndex = (men.end+1);                    
+                    const username = `@${men.username}`;
+                    newValue = newValue.concat(username);
+                    const menEndIndex = (men.start + (username.length - 1));
+                    map.set([men.start, menEndIndex], {
+                        id: men.id,
+                        username: men.username
+                    });            
+                    if((mentions.length-1) === index){
+                        const lastStr = retLine.substr(lastIndex);//remaining string
+                        newValue = newValue.concat(lastStr);
+                    }
+                });
+            }else{
+                newValue = newValue.concat(retLine);
+            }            
+            if(rowIndex !== retLines.length-1){
+                newValue = newValue.concat("\n");
+            }
+        });    
+        return {
+            map,
+            newValue
+        };    
+    },
     findMentions: (val) => {
         /**
          * Both Mentions and Selections are 0-th index based in the strings
@@ -141,7 +183,7 @@ export const EU = {
                 start: match.index, 
                 end: (reg.lastIndex-1),
                 username: match[1],
-                userId: match[2],
+                id: match[2],
                 type: EU.specialTagsEnum.mention
             });
         }

@@ -105,7 +105,7 @@ findMentions: (val) => {
 
 **`list: array`** This should be the list of objects to be used as options for the mentions list. **Note** This must contain `id` and `username` properties to uniqely identify object in the list. 
 
-**`initialValue: string`** Use this to initialize TextInput with the initial value. 
+**`initialValue: string`** Use this to initialize TextInput with the initial value. Usage. `initalValue: "Hey @[mrazadar](id:1) this is good work"`
 
 **`clearInput: bool`** When true input will be clear automatically. 
 

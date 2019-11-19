@@ -44,7 +44,7 @@ export default StyleSheet.create({
         color: '#244dc9',
     },
     placeholderText: {
-        color: 'rgba(0, 0, 0, 0.6)',
+        color: 'rgba(0, 0, 0, 0.1)',
         fontSize: 16,        
     }
      
