@@ -69,8 +69,8 @@ this.props.onChange({
 `text` Will have formatted text with some markup to parse mentions on the server and other clients. There is a function called `displayTextWithMentions` you can use this function to parse this mark-up with the parser function (Which format the mention node according to formatter function. Check the example app). 
 
 If you want to only parse mentions in the string but don't want to format them you can use this `EditorUtils.findMentions` function to actually parse the mentions in the string. 
-This will parse special mark `@[username](id:1)` and gives you the exact `positions` and `username` and `id` for that mention. Which you can use for tagging / emailing purposes on the server etc.
-You can use this function by importing: 
+This will parse special mark-up `@[username](id:1)` and gives you the exact `positions` and `username` and `id` for that mention. Which you can use for tagging / emailing purposes on the server etc.
+You can use this function as: 
 
 
 ```js
