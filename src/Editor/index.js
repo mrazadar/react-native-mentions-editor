@@ -27,7 +27,7 @@ export class Editor extends React.Component {
         onHideMentions: PropTypes.func,
         editorStyles: PropTypes.object, 
         placeholder: PropTypes.string,
-        renderMentionList: PropTypes.oneOfType([ PropTypes.func, PropTypes.null]),            
+        renderMentionList: PropTypes.func,            
     }
 
     constructor(props) {
@@ -35,9 +35,11 @@ export class Editor extends React.Component {
         this.mentionsMap = new Map();
         let msg = '' 
         let formattedMsg = '' 
-        if(props.initialValue && (props.initialValue !== '')){
-            msg = props.initialValue; 
-            formattedMsg = this.formatTextWithMentions(props.initialValue); 
+        if(props.initialValue && props.initialValue !== ''){                        
+            const { map, newValue } = EU.getMentionsWithInputText(props.initialValue);            
+            this.mentionsMap = map;          
+            msg = newValue;   
+            formattedMsg = this.formatText(newValue); 
         }
         this.state = {
             clearInput: props.clearInput,
@@ -256,7 +258,7 @@ export class Editor extends React.Component {
 
         this.setState({
             inputText: text,
-            formattedText: this.formateText(text),
+            formattedText: this.formatText(text),
         });
         this.stopTracking();
         this.sendMessageToFooter(text);
@@ -294,13 +296,12 @@ export class Editor extends React.Component {
         </Text>
     )
 
-    formateText(inputText) {
+    formatText(inputText) {
         /**
          * Format the Mentions
          * and display them with 
          * the different styles         
          */
-
         if (inputText === '' || !this.mentionsMap.size) return inputText;
         const formattedText = [];
         let lastIndex = 0;
@@ -318,7 +319,7 @@ export class Editor extends React.Component {
         return formattedText;
     }
 
-    formatTextWithMentions(inputText) {
+    formatTextWithMentions(inputText) {        
         if (inputText === '' || !this.mentionsMap.size) return inputText;
         let formattedText = "";
         let lastIndex = 0;
@@ -357,8 +358,7 @@ export class Editor extends React.Component {
              * if user is back pressing and it 
              * deletes the mention remove it from 
              * actual string. 
-             */
-            // debugger;
+             */            
 
             let charDeleted = Math.abs(text.length - prevText.length);
             const totalSelection = {
@@ -425,7 +425,7 @@ export class Editor extends React.Component {
 
         this.setState({
             inputText: text,
-            formattedText: this.formateText(text),
+            formattedText: this.formatText(text),
             // selection,
         });
         this.checkForMention(text, selection);
