@@ -10,8 +10,7 @@ import {
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
-import Editor from '../Components/TextEditor'
-import EU from '../Components/TextEditor/EditorUtils'
+import Editor, { EU } from 'react-native-mentions-editor'
 
 // Styles
 import styles from './Styles/ChatScreenStyles'
@@ -34,9 +33,9 @@ class ChatScreen extends Component {
   constructor(props){
     super(props)
     this.state = {
-      initialValue: 'Something interested.',
+      initialValue: '', //'Hey @[mrazadar](id:1) this is good work',
       showEditor: true,      
-      message: 'Inital message',
+      message: '',
       messages: [],
       clearInput: false, 
       showMentions: false, /**use this parameter to programmatically trigger the mentionsList */
@@ -134,6 +133,7 @@ class ChatScreen extends Component {
                 toggleEditor={this.toggleEditor}
                 showMentions={this.state.showMentions}
                 onHideMentions={this.onHideMentions}
+                placeholder="You can write here..."
               />       
               <TouchableOpacity                  
                   style={styles.sendBtn}
