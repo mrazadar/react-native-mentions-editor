@@ -1,16 +1,13 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-    container: {
-        // flex:1, 
-        maxHeight: 300,
-    },
-    suggestionsPanelStyle: {
-    },
-    loaderContainer: {
-
-    },
-    mentionsListContainer: {
-        height: 100
-    }
-})
+  container: {
+    // flex:1,
+    maxHeight: 300
+  },
+  suggestionsPanelStyle: {},
+  loaderContainer: {},
+  mentionsListContainer: {
+    height: 100
+  }
+});
