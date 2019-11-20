@@ -39,6 +39,9 @@ export class Editor extends React.Component {
       this.mentionsMap = map;
       msg = newValue;
       formattedMsg = this.formatText(newValue);
+      setTimeout(()=>{
+        this.sendMessageToFooter(newValue);
+      });
     }
     this.state = {
       clearInput: props.clearInput,

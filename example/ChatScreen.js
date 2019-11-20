@@ -36,7 +36,7 @@ class ChatScreen extends Component {
       initialValue:
         "Hey @[mrazadar](id:1) this is good work. Tell @[john.doe](id:5) to use this package.",
       showEditor: true,
-      message: "",
+      message: null,
       messages: [],
       clearInput: false,
       showMentions: false /**use this parameter to programmatically trigger the mentionsList */
@@ -46,6 +46,7 @@ class ChatScreen extends Component {
     /**
      * this callback will be called whenever input value change and will have
      * formatted value for mentioned syntax
+     * @message : {text: 'Hey @(mrazadar)(id:1) this is good work.', displayText: `Hey @mrazadar this is good work`}
      * */
 
     this.setState({
@@ -54,12 +55,11 @@ class ChatScreen extends Component {
     });
   };
   sendMessage = () => {
-    if (this.state.message == "") return;
+    if (!this.state.message) return;
     const messages = [this.state.message, ...this.state.messages];
-    console.log("Messages", messages);
     this.setState({
       messages,
-      message: "",
+      message: null,
       clearInput: true
     });
   };
