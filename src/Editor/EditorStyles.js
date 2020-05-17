@@ -21,9 +21,9 @@ export default StyleSheet.create({
     minHeight: 40,
     position: "absolute",
     top: 0,
-    color: "transparent",
     alignSelf: "stretch",
-    width: "100%"
+    width: "100%",
+    height: '100%' // added for android
   },
   formmatedTextWrapper: {
     minHeight: 40,
