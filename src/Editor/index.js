@@ -26,7 +26,8 @@ export class Editor extends React.Component {
     onHideMentions: PropTypes.func,
     editorStyles: PropTypes.object,
     placeholder: PropTypes.string,
-    renderMentionList: PropTypes.func
+    renderMentionList: PropTypes.func,
+    placeMentionListOnBottom: PropTypes.bool,
   };
 
   constructor(props) {
@@ -68,22 +69,31 @@ export class Editor extends React.Component {
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.clearInput !== prevState.clearInput) {
-      return { clearInput: nextProps.clearInput };
+      return { clearInput: nextProps.clearInput, placeholder: nextProps.placeholder };
     }
 
     if (nextProps.showMentions && !prevState.showMentions) {
       const newInputText = `${prevState.inputText}${prevState.trigger}`;
       return {
         inputText: newInputText,
-        showMentions: nextProps.showMentions
+        showMentions: nextProps.showMentions,
+        placeholder: nextProps.placeholder
       };
     }
 
     if (!nextProps.showMentions) {
       return {
-        showMentions: nextProps.showMentions
+        showMentions: nextProps.showMentions,
+        placeholder: nextProps.placeholder
       };
     }
+
+    if (nextProps.placeholder !== prevState.placeholder) {
+      return {
+        placeholder: nextProps.placeholder
+      };
+    }
+
     return null;
   }
 
@@ -128,7 +138,10 @@ export class Editor extends React.Component {
     this.setState({
       isTrackingStarted: false
     });
-    this.props.onHideMentions();
+    if (this.props.onHideMentions) {
+      this.props.onHideMentions();
+    }
+    
   }
 
   updateSuggestions(lastKeyword) {
@@ -305,11 +318,16 @@ export class Editor extends React.Component {
     this.setState({ selection: newSelc });
   };
 
-  formatMentionNode = (txt, key) => (
-    <Text key={key} style={styles.mention}>
-      {txt}
-    </Text>
-  );
+  formatMentionNode = (txt, key) => {
+    const { props } = this;
+    const { editorStyles = {} } = props;
+
+    return(
+      <Text key={key} style={[styles.mention, editorStyles.mentionNode]}>
+        {txt}
+      </Text>
+    )
+  };
 
   formatText(inputText) {
     /**
@@ -512,20 +530,27 @@ export class Editor extends React.Component {
       editorStyles
     };
 
+    const mentionListComponent = (
+      props.renderMentionList ? (
+        props.renderMentionList(mentionListProps)
+      ) : (
+        <MentionList
+          list={props.list}
+          keyword={state.keyword}
+          isTrackingStarted={state.isTrackingStarted}
+          onSuggestionTap={this.onSuggestionTap}
+          editorStyles={editorStyles}
+        />
+      )
+    )
+
+    const selection = (Platform.OS === 'ios' || this.state.inputText.length >= this.state.selection.start) ?
+      this.state.selection : { start: this.state.inputText.length, end: this.state.inputText.length };
+
     return (
       <View styles={editorStyles.mainContainer}>
-        {props.renderMentionList ? (
-          props.renderMentionList(mentionListProps)
-        ) : (
-          <MentionList
-            list={props.list}
-            keyword={state.keyword}
-            isTrackingStarted={state.isTrackingStarted}
-            onSuggestionTap={this.onSuggestionTap}
-            editorStyles={editorStyles}
-          />
-        )}
         <View style={[styles.container, editorStyles.mainContainer]}>
+          { !props.placeMentionListOnBottom && mentionListComponent }
           <ScrollView
             ref={scroll => {
               this.scroll = scroll;
@@ -535,50 +560,33 @@ export class Editor extends React.Component {
             }}
             style={[styles.editorContainer, editorStyles.editorContainer]}
           >
-            <View style={[{ height: this.state.editorHeight }]}>
-              <View
-                style={[
-                  styles.formmatedTextWrapper,
-                  editorStyles.inputMaskTextWrapper
-                ]}
-              >
-                {state.formattedText !== "" ? (
-                  <Text
-                    style={[styles.formmatedText, editorStyles.inputMaskText]}
-                  >
-                    {state.formattedText}
-                  </Text>
-                ) : (
-                  <Text
-                    style={[
-                      styles.placeholderText,
-                      editorStyles.placeholderText
-                    ]}
-                  >
-                    {state.placeholder}
-                  </Text>
-                )}
-              </View>
+            <View style={[{ height: this.state.editorHeight }]}>              
               <TextInput
+                onLayout={props.onLayout}
                 ref={input => props.onRef && props.onRef(input)}
                 style={[styles.input, editorStyles.input]}
                 multiline
                 autoFocus
                 numberOfLines={100}
                 name={"message"}
-                value={state.inputText}
+                value={null}
                 onBlur={props.toggleEditor}
                 onChangeText={this.onChange}
-                selection={this.state.selection}
+                selection={selection}
                 selectionColor={"#000"}
                 onSelectionChange={this.handleSelectionChange}
                 placeholder={state.placeholder}
+                placeholderTextColor = { props.placeholderTextColor}
                 onContentSizeChange={this.onContentSizeChange}
                 scrollEnabled={false}
-              />
+                inputAccessoryViewID={props.inputAccessoryViewID}
+              >
+                { state.formattedText }
+              </TextInput>
             </View>
           </ScrollView>
         </View>
+        { props.placeMentionListOnBottom && mentionListComponent }
       </View>
     );
   }
