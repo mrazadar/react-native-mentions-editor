@@ -4,9 +4,18 @@ import { ActivityIndicator, FlatList, Animated, View } from "react-native";
 
 import MentionListItem from "../MentionListItem";
 // Styles
-import styles from "./MentionListStyles";
+import styles from "../MentionList/MentionListStyles";
 
-export class MentionList extends React.PureComponent {
+interface Props {
+  list: any,
+  editorStyles: any,
+  isTrackingStarted: boolean,
+  suggestions: any,
+  keyword: string,
+  onSuggestionTap: Function
+}
+
+export class MentionList extends React.PureComponent<Props> {
   static propTypes = {
     list: PropTypes.array,
     editorStyles: PropTypes.object,
@@ -16,10 +25,7 @@ export class MentionList extends React.PureComponent {
     onSuggestionTap: PropTypes.func
   };
 
-  constructor() {
-    super();
-    this.previousChar = " ";
-  }
+  previousChar = " ";
 
   renderSuggestionsRow = ({ item }) => {
     return (
@@ -59,9 +65,9 @@ export class MentionList extends React.PureComponent {
               <ActivityIndicator />
             </View>
           }
-          enableEmptySections={true}
+          //enableEmptySections={true}
           data={suggestions}
-          keyExtractor={(item, index) => `${item.id}-${index}`}
+          keyExtractor={(item: any, index: number) => `${item.id}-${index}`}
           renderItem={rowData => {
             return this.renderSuggestionsRow(rowData);
           }}
