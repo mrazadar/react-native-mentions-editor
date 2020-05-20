@@ -41,7 +41,7 @@ interface Props {
   initialValue: string,
   clearInput?: boolean,
   onChange: Function,
-  showEditor?: Function,
+  showEditor?: boolean,
   toggleEditor?(e: any): {},
   showMentions?: boolean,
   onHideMentions?: Function,
