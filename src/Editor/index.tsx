@@ -164,7 +164,7 @@ export class Editor extends React.Component<Props, State> {
     return null;
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: Props) {
     // only update chart if the data has changed
     if (this.state.inputText !== "" && this.state.clearInput) {
       this.setState({
@@ -177,6 +177,17 @@ export class Editor extends React.Component<Props, State> {
     if (EU.whenTrue(this.props, prevProps, "showMentions")) {
       //don't need to close on false; user show select it.
       this.onChange(this.state.inputText, true);
+    }
+
+    if (this.props.initialValue !== prevProps.initialValue) {
+      const { map, newValue } = EU.getMentionsWithInputText(this.props.initialValue);
+      this.mentionsMap = map;
+      let msg = newValue;
+      let formattedMsg = this.formatText(newValue);
+      setTimeout(() => {
+        this.sendMessageToFooter(newValue);
+      });
+      this.setState({ inputText: msg, formattedText: formattedMsg });
     }
   }
 
