@@ -97,6 +97,7 @@ export class Editor extends React.Component<Props, State> {
   previousChar = " ";
   menIndex = 0;
   scroll = null;
+  textInputRef = null;
 
   constructor(props) {
     super(props);
@@ -215,6 +216,7 @@ export class Editor extends React.Component<Props, State> {
     this.setState({
       keyword: lastKeyword
     });
+    
     if (this.props.updateSuggestions)
       this.props.updateSuggestions(lastKeyword);
   }
@@ -361,6 +363,8 @@ export class Editor extends React.Component<Props, State> {
     });
     this.stopTracking();
     this.sendMessageToFooter(text);
+    if (this.textInputRef)
+      this.textInputRef.focus();
   };
 
   handleSelectionChange = ({ nativeEvent: { selection } }) => {
@@ -595,7 +599,7 @@ export class Editor extends React.Component<Props, State> {
       list: props.list,
       keyword: state.keyword,
       isTrackingStarted: state.isTrackingStarted,
-      onSuggestionTap: this.onSuggestionTap.bind(this),
+      onSuggestionTap: this.onSuggestionTap,
       editorStyles
     };
 
@@ -633,6 +637,7 @@ export class Editor extends React.Component<Props, State> {
             <View style={[{ height: this.state.editorHeight }]}>
               <TextInput
                 {...props.textInputProps}
+                ref={r => this.textInputRef = r}
                 style={[styles.input, editorStyles.input]}
                 multiline
                 autoFocus
