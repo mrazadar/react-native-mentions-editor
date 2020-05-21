@@ -8,6 +8,6 @@ export default StyleSheet.create({
   suggestionsPanelStyle: {},
   loaderContainer: {},
   mentionsListContainer: {
-    height: 100
+    maxHeight: 100
   }
 });

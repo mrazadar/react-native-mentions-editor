@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ActivityIndicator, FlatList, Animated, View } from "react-native";
+import { ActivityIndicator, FlatList, Animated, View, ScrollViewProps } from "react-native";
 
 import MentionListItem from "../MentionListItem";
 // Styles
@@ -13,6 +13,7 @@ interface Props {
   suggestions: any,
   keyword: string,
   onSuggestionTap: Function
+  mentionsListProps: ScrollViewProps
 }
 
 export class MentionList extends React.PureComponent<Props> {
@@ -57,9 +58,9 @@ export class MentionList extends React.PureComponent<Props> {
         ]}
       >
         <FlatList
+          {...props.mentionsListProps}
           style={styles.mentionsListContainer}
           keyboardShouldPersistTaps={"always"}
-          horizontal={false}
           ListEmptyComponent={
             <View style={styles.loaderContainer}>
               <ActivityIndicator />

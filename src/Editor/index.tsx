@@ -9,7 +9,8 @@ import {
   ScrollView,
   ViewStyle,
   TextStyle,
-  TextInputProps
+  TextInputProps,
+  ScrollViewProps
 } from "react-native";
 
 import EU from "./EditorUtils";
@@ -23,17 +24,17 @@ type listItem = {
 }
 
 type editorStylesProps = {
-  mainContainer: ViewStyle,
-  editorContainer: ViewStyle,
-  inputMaskTextWrapper: TextStyle,
-  inputMaskText: TextStyle,
-  input: TextStyle,
-  mentionsListWrapper: ViewStyle,
-  mentionListItemWrapper: ViewStyle,
-  mentionListItemTextWrapper: ViewStyle,
-  mentionListItemTitle: TextStyle,
-  mentionListItemUsername: TextStyle
-  mentionNode: ViewStyle
+  mainContainer?: ViewStyle,
+  editorContainer?: ViewStyle,
+  inputMaskTextWrapper?: TextStyle,
+  inputMaskText?: TextStyle,
+  input?: TextStyle,
+  mentionsListWrapper?: ViewStyle,
+  mentionListItemWrapper?: ViewStyle,
+  mentionListItemTextWrapper?: ViewStyle,
+  mentionListItemTitle?: TextStyle,
+  mentionListItemUsername?: TextStyle
+  mentionNode?: ViewStyle,
 }
 
 interface Props {
@@ -49,7 +50,10 @@ interface Props {
   placeholder?: string,
   renderMentionList?: Function,
   placeMentionListOnBottom?: boolean,
-  textInputProps: TextInputProps
+  textInputProps: TextInputProps,
+  updateSuggestions: Function,
+  mentionsListProps: ScrollViewProps
+
   // textInputMinHeight: number
 }
 
@@ -85,6 +89,7 @@ export class Editor extends React.Component<Props, State> {
     placeholder: "",
     renderMentionList: null,
     placeMentionListOnBottom: false,
+    mentionsListProps: {}
   };
 
   mentionsMap = new Map();
@@ -186,11 +191,12 @@ export class Editor extends React.Component<Props, State> {
   startTracking(menIndex) {
     this.isTrackingStarted = true;
     this.menIndex = menIndex;
+    this.updateSuggestions("");
     this.setState({
-      keyword: "",
       menIndex,
       isTrackingStarted: true
     });
+
   }
 
   stopTracking() {
@@ -209,6 +215,8 @@ export class Editor extends React.Component<Props, State> {
     this.setState({
       keyword: lastKeyword
     });
+    if (this.props.updateSuggestions)
+      this.props.updateSuggestions(lastKeyword);
   }
 
   resetTextbox() {
@@ -601,13 +609,14 @@ export class Editor extends React.Component<Props, State> {
             isTrackingStarted={state.isTrackingStarted}
             onSuggestionTap={this.onSuggestionTap}
             editorStyles={editorStyles}
+            mentionsListProps={props.mentionsListProps}
           />
         )
     )
 
     const selection = (Platform.OS === 'ios' || this.state.inputText.length >= this.state.selection.start) ?
       this.state.selection : { start: this.state.inputText.length, end: this.state.inputText.length };
-      
+
     return (
       <View style={editorStyles.mainContainer}>
         <View style={[styles.container, editorStyles.mainContainer]}>

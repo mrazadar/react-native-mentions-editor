@@ -11,7 +11,6 @@ interface Props {
   item: any,
   onSuggestionTap: Function,
   editorStyles: any,
-  index: number
 }
 
 export class MentionListItem extends React.PureComponent<Props> {
@@ -26,7 +25,7 @@ export class MentionListItem extends React.PureComponent<Props> {
   };
 
   render() {
-    const { item: user, index, editorStyles } = this.props;
+    const { item: user, editorStyles } = this.props;
     return (
       <View>
         <TouchableOpacity
