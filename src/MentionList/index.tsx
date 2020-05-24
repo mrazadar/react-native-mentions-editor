@@ -1,12 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ActivityIndicator, FlatList, Animated, View } from "react-native";
+import { ActivityIndicator, FlatList, Animated, View, ScrollViewProps } from "react-native";
 
 import MentionListItem from "../MentionListItem";
 // Styles
-import styles from "./MentionListStyles";
+import styles from "../MentionList/MentionListStyles";
 
-export class MentionList extends React.PureComponent {
+interface Props {
+  list: any,
+  editorStyles: any,
+  isTrackingStarted: boolean,
+  suggestions: any,
+  keyword: string,
+  onSuggestionTap: Function
+  mentionsListProps: ScrollViewProps
+}
+
+export class MentionList extends React.PureComponent<Props> {
   static propTypes = {
     list: PropTypes.array,
     editorStyles: PropTypes.object,
@@ -16,10 +26,7 @@ export class MentionList extends React.PureComponent {
     onSuggestionTap: PropTypes.func
   };
 
-  constructor() {
-    super();
-    this.previousChar = " ";
-  }
+  previousChar = " ";
 
   renderSuggestionsRow = ({ item }) => {
     return (
@@ -51,17 +58,17 @@ export class MentionList extends React.PureComponent {
         ]}
       >
         <FlatList
+          {...props.mentionsListProps}
           style={styles.mentionsListContainer}
           keyboardShouldPersistTaps={"always"}
-          horizontal={false}
           ListEmptyComponent={
             <View style={styles.loaderContainer}>
               <ActivityIndicator />
             </View>
           }
-          enableEmptySections={true}
+          //enableEmptySections={true}
           data={suggestions}
-          keyExtractor={(item, index) => `${item.id}-${index}`}
+          keyExtractor={(item: any, index: number) => `${item.id}-${index}`}
           renderItem={rowData => {
             return this.renderSuggestionsRow(rowData);
           }}

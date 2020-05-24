@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
+    
     borderColor: "green",
     borderWidth: 1,
     width: 300
@@ -21,9 +21,9 @@ export default StyleSheet.create({
     minHeight: 40,
     position: "absolute",
     top: 0,
-    color: "transparent",
     alignSelf: "stretch",
-    width: "100%"
+    width: "100%",
+    height: '100%' // added for android
   },
   formmatedTextWrapper: {
     minHeight: 40,
@@ -40,7 +40,6 @@ export default StyleSheet.create({
   mention: {
     fontSize: 16,
     fontWeight: "400",
-    backgroundColor: "rgba(36, 77, 201, 0.05)",
     color: "#244dc9"
   },
   placeholderText: {

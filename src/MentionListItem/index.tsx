@@ -7,19 +7,25 @@ import styles from "./MentionListItemStyles";
 
 import Avatar from "../Avatar";
 
-export class MentionListItem extends React.PureComponent {
+interface Props {
+  item: any,
+  onSuggestionTap: Function,
+  editorStyles: any,
+}
+
+export class MentionListItem extends React.PureComponent<Props> {
   static propTypes = {
     item: PropTypes.object,
     onSuggestionTap: PropTypes.func,
     editorStyles: PropTypes.object
   };
 
-  onSuggestionTap = (user, hidePanel) => {
+  onSuggestionTap = (user) => {
     this.props.onSuggestionTap(user);
   };
 
   render() {
-    const { item: user, index, editorStyles } = this.props;
+    const { item: user, editorStyles } = this.props;
     return (
       <View>
         <TouchableOpacity
@@ -38,7 +44,7 @@ export class MentionListItem extends React.PureComponent {
               {user.name}
             </Text>
             <Text
-              style={[styles.username, editorStyles.mentionListItemUsername]}
+              style={[editorStyles.mentionListItemUsername]}
             >
               @{user.username}
             </Text>
