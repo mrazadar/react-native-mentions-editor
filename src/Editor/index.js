@@ -543,10 +543,14 @@ export class Editor extends React.Component {
         />
       )
     )
-
-    const selection = (Platform.OS === 'ios' || this.state.inputText.length >= this.state.selection.start) ?
-      this.state.selection : { start: this.state.inputText.length, end: this.state.inputText.length };
-
+    let selection;
+    if (Platform.OS === 'ios') {
+      selection = (this.state.inputText.length >= this.state.selection.start) ?
+        this.state.selection : { start: this.state.inputText.length, end: this.state.inputText.length };
+    } else {
+      selection = { start: this.state.inputText.length, end: this.state.inputText.length };
+    }
+    
     return (
       <View styles={editorStyles.mainContainer}>
         <View style={[styles.container, editorStyles.mainContainer]}>
