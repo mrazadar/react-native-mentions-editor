@@ -26,7 +26,8 @@ export class Editor extends React.Component {
     onHideMentions: PropTypes.func,
     editorStyles: PropTypes.object,
     placeholder: PropTypes.string,
-    renderMentionList: PropTypes.func
+    renderMentionList: PropTypes.func,
+    keyboardType: PropTypes.string
   };
 
   constructor(props) {
@@ -575,6 +576,7 @@ export class Editor extends React.Component {
                 placeholder={state.placeholder}
                 onContentSizeChange={this.onContentSizeChange}
                 scrollEnabled={false}
+                keyboardType={props.keyboardType}
               />
             </View>
           </ScrollView>
