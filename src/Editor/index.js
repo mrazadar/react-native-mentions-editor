@@ -39,7 +39,7 @@ export class Editor extends React.Component {
       this.mentionsMap = map;
       msg = newValue;
       formattedMsg = this.formatText(newValue);
-      setTimeout(()=>{
+      setTimeout(() => {
         this.sendMessageToFooter(newValue);
       });
     }
@@ -59,7 +59,7 @@ export class Editor extends React.Component {
       },
       menIndex: 0,
       showMentions: false,
-      editorHeight: 72,
+      editorHeight: 45,
       scrollContentInset: { top: 0, bottom: 0, left: 0, right: 0 },
       placeholder: props.placeholder || "Type something..."
     };
@@ -490,7 +490,7 @@ export class Editor extends React.Component {
         Platform.OS === "ios"
           ? evt.nativeEvent.contentSize.height
           : evt.nativeEvent.contentSize.height - androidTextHeight;
-      let editorHeight = 40;
+      let editorHeight = 15;
       editorHeight = editorHeight + height;
       this.setState({
         editorHeight
@@ -517,14 +517,14 @@ export class Editor extends React.Component {
         {props.renderMentionList ? (
           props.renderMentionList(mentionListProps)
         ) : (
-          <MentionList
-            list={props.list}
-            keyword={state.keyword}
-            isTrackingStarted={state.isTrackingStarted}
-            onSuggestionTap={this.onSuggestionTap}
-            editorStyles={editorStyles}
-          />
-        )}
+            <MentionList
+              list={props.list}
+              keyword={state.keyword}
+              isTrackingStarted={state.isTrackingStarted}
+              onSuggestionTap={this.onSuggestionTap}
+              editorStyles={editorStyles}
+            />
+          )}
         <View style={[styles.container, editorStyles.mainContainer]}>
           <ScrollView
             ref={scroll => {
@@ -549,15 +549,15 @@ export class Editor extends React.Component {
                     {state.formattedText}
                   </Text>
                 ) : (
-                  <Text
-                    style={[
-                      styles.placeholderText,
-                      editorStyles.placeholderText
-                    ]}
-                  >
-                    {state.placeholder}
-                  </Text>
-                )}
+                    <Text
+                      style={[
+                        styles.placeholderText,
+                        editorStyles.placeholderText
+                      ]}
+                    >
+                      {state.placeholder}
+                    </Text>
+                  )}
               </View>
               <TextInput
                 ref={input => props.onRef && props.onRef(input)}
