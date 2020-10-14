@@ -27,7 +27,8 @@ export class Editor extends React.Component {
     editorStyles: PropTypes.object,
     placeholder: PropTypes.string,
     renderMentionList: PropTypes.func,
-    keyboardType: PropTypes.string
+    keyboardType: PropTypes.string,
+    autoFocus: PropTypes.bool
   };
 
   constructor(props) {
@@ -564,7 +565,7 @@ export class Editor extends React.Component {
                 ref={input => props.onRef && props.onRef(input)}
                 style={[styles.input, editorStyles.input]}
                 multiline
-                autoFocus
+                autoFocus={props.autoFocus}
                 numberOfLines={100}
                 name={"message"}
                 value={state.inputText}
