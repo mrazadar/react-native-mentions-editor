@@ -20,7 +20,6 @@ export class Editor extends React.Component {
     initialValue: PropTypes.string,
     clearInput: PropTypes.bool,
     onChange: PropTypes.func,
-    showEditor: PropTypes.bool,
     toggleEditor: PropTypes.func,
     showMentions: PropTypes.bool,
     onHideMentions: PropTypes.func,
@@ -68,6 +67,13 @@ export class Editor extends React.Component {
     this.isTrackingStarted = false;
     this.previousChar = " ";
   }
+
+  setMessage(message) {
+    this.setState({
+      inputText: message
+    })
+  }
+
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.clearInput !== prevState.clearInput) {
       return { clearInput: nextProps.clearInput };
@@ -503,8 +509,6 @@ export class Editor extends React.Component {
   render() {
     const { props, state } = this;
     const { editorStyles = {} } = props;
-
-    if (!props.showEditor) return null;
 
     const mentionListProps = {
       list: props.list,
