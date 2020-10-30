@@ -74,6 +74,10 @@ export class Editor extends React.Component {
     })
   }
 
+  focus() {
+    this.input.focus()
+  }
+
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.clearInput !== prevState.clearInput) {
       return { clearInput: nextProps.clearInput };
@@ -566,7 +570,7 @@ export class Editor extends React.Component {
                   )}
               </View>
               <TextInput
-                ref={input => props.onRef && props.onRef(input)}
+                ref={input => (this.input = input)}
                 style={[styles.input, editorStyles.input]}
                 multiline
                 autoFocus={props.autoFocus}
