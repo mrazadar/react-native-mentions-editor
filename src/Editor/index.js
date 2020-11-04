@@ -69,13 +69,40 @@ export class Editor extends React.Component {
   }
 
   setMessage(message) {
+    const { map, newValue } = EU.getMentionsWithInputText(message);
+    this.mentionsMap = map;
+    const formattedText = this.formatText(newValue)
     this.setState({
-      inputText: message
+      inputText: newValue,
+      formattedText
     })
   }
 
-  focus() {
-    this.input.focus()
+  focus(selection) {
+    this.input.focus();
+  }
+
+  clear() {
+    this.mentionsMap = new Map();
+    this.isTrackingStarted = false;
+    this.previousChar = " ";
+    this.menIndex = 0;
+    this.setState({
+      inputText: "",
+      formattedText: "",
+      selection: {
+        start: 0,
+        end: 0
+      },
+      menIndex: 0,
+      showMentions: false,
+      keyword: "",
+      textInputHeight: "",
+      isTrackingStarted: false
+    })
+    setTimeout(() => {
+      this.input.clear()
+    }, 250);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -101,13 +128,7 @@ export class Editor extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     // only update chart if the data has changed
-    if (this.state.inputText !== "" && this.state.clearInput) {
-      this.setState({
-        inputText: "",
-        formattedText: ""
-      });
-      this.mentionsMap.clear();
-    }
+    if (this.state.inputText !== "" && this.state.clearInput) this.clear()
 
     if (EU.whenTrue(this.props, prevProps, "showMentions")) {
       //don't need to close on false; user show select it.
