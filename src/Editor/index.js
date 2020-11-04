@@ -71,11 +71,11 @@ export class Editor extends React.Component {
   setMessage(message) {
     const { map, newValue } = EU.getMentionsWithInputText(message);
     this.mentionsMap = map;
-    const formattedText = this.formatText(newValue)
+    const formattedText = this.formatText(newValue);
     this.setState({
       inputText: newValue,
       formattedText
-    })
+    });
   }
 
   focus(selection) {
@@ -99,9 +99,9 @@ export class Editor extends React.Component {
       keyword: "",
       textInputHeight: "",
       isTrackingStarted: false
-    })
+    });
     setTimeout(() => {
-      this.input.clear()
+      this.input.clear();
     }, 250);
   }
 
