@@ -1,5 +1,7 @@
 import { StyleSheet } from "react-native";
 
+const editorMinHeight = 36
+
 export default StyleSheet.create({
   container: {
     backgroundColor: "#fff",
@@ -10,7 +12,7 @@ export default StyleSheet.create({
   textContainer: {
     alignSelf: "stretch",
     position: "relative",
-    minHeight: 40,
+    minHeight: editorMinHeight,
     maxHeight: 140
   },
   input: {
@@ -18,7 +20,7 @@ export default StyleSheet.create({
     color: "#000",
     fontWeight: "400",
     paddingHorizontal: 20,
-    minHeight: 40,
+    minHeight: editorMinHeight,
     position: "absolute",
     top: 0,
     color: "transparent",
@@ -26,7 +28,7 @@ export default StyleSheet.create({
     width: "100%"
   },
   formmatedTextWrapper: {
-    minHeight: 40,
+    minHeight: editorMinHeight,
     position: "absolute",
     top: 0,
     paddingHorizontal: 20,

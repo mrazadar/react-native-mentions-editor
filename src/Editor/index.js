@@ -60,7 +60,7 @@ export class Editor extends React.Component {
       },
       menIndex: 0,
       showMentions: false,
-      editorHeight: 45,
+      editorHeight: undefined,
       scrollContentInset: { top: 0, bottom: 0, left: 0, right: 0 },
       placeholder: props.placeholder || "Type something..."
     };
@@ -514,21 +514,11 @@ export class Editor extends React.Component {
      * calculate editor height w.r.t
      * the size of text in the input.
      */
-    if (evt) {
-      // const iosTextHeight = 20.5
-      const androidTextHeight = 20.5;
-      // const textHeight = Platform.OS === 'ios' ? iosTextHeight : androidTextHeight
-
-      const height =
-        Platform.OS === "ios"
-          ? evt.nativeEvent.contentSize.height
-          : evt.nativeEvent.contentSize.height - androidTextHeight;
-      let editorHeight = 15;
-      editorHeight = editorHeight + height;
-      this.setState({
-        editorHeight
-      });
-    }
+    if (!evt) return
+    const delta = Platform.select({ android: 20.5, default: 0 })
+    this.setState({
+      editorHeight: evt.nativeEvent.layout.height - delta
+    });
   };
 
   render() {
@@ -566,7 +556,7 @@ export class Editor extends React.Component {
             }}
             style={[styles.editorContainer, editorStyles.editorContainer]}
           >
-            <View style={[{ height: this.state.editorHeight }]}>
+            <View style={[{ height: state.editorHeight ? state.editorHeight : 'auto' }]}>
               <View
                 style={[
                   styles.formmatedTextWrapper,
@@ -593,6 +583,7 @@ export class Editor extends React.Component {
               <TextInput
                 ref={input => (this.input = input)}
                 style={[styles.input, editorStyles.input]}
+                onLayout={this.onContentSizeChange}
                 multiline
                 autoFocus={props.autoFocus}
                 numberOfLines={100}
@@ -604,7 +595,6 @@ export class Editor extends React.Component {
                 selectionColor={"#000"}
                 onSelectionChange={this.handleSelectionChange}
                 placeholder={state.placeholder}
-                onContentSizeChange={this.onContentSizeChange}
                 scrollEnabled={false}
                 keyboardType={props.keyboardType}
               />
