@@ -26,7 +26,12 @@ export class Editor extends React.Component {
     onHideMentions: PropTypes.func,
     editorStyles: PropTypes.object,
     placeholder: PropTypes.string,
-    renderMentionList: PropTypes.func
+    renderMentionList: PropTypes.func,
+    onUpdateSuggestions: PropTypes.func
+  };
+
+  static defaultProps = {
+    onUpdateSuggestions: () => {}
   };
 
   constructor(props) {
@@ -135,6 +140,7 @@ export class Editor extends React.Component {
     this.setState({
       keyword: lastKeyword
     });
+    this.props.onUpdateSuggestions(lastKeyword);
   }
 
   resetTextbox() {

@@ -124,6 +124,20 @@ findMentions: (val) => {
 
 **`placeholder: string`** placeholder for empty input. 
 
+**`onUpdateSuggestions: function`** This function will be called on the mention keyword change. You can use this property to fetch the list from the data source.
+
+```js
+<Editor
+  list={this.state.users}
+  onUpdateSuggestions={(keyword) => {
+    this.setState({
+        users: fetchUsers(keyword)
+    });
+  }}
+...
+/>
+```
+
 **`renderMentionList: function`** If you want to render totally different list. You can use this property to provide alternative mention list renderer. It will be called with certain properties to controll the functionality of list.
 
 ```js
