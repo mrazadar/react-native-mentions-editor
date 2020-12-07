@@ -30,6 +30,10 @@ export class Editor extends React.Component {
     onUpdateSuggestions: PropTypes.func
   };
 
+  static defaultProps = {
+    onUpdateSuggestions: () => {}
+  };
+
   constructor(props) {
     super(props);
     this.mentionsMap = new Map();

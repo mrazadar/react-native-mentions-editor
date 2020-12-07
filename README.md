@@ -124,6 +124,8 @@ findMentions: (val) => {
 
 **`placeholder: string`** placeholder for empty input. 
 
+**`onUpdateSuggestions: function`** This function will be called on mention keyword change.
+
 **`renderMentionList: function`** If you want to render totally different list. You can use this property to provide alternative mention list renderer. It will be called with certain properties to controll the functionality of list.
 
 ```js
