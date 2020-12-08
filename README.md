@@ -46,14 +46,22 @@ const users = [
 />
 
 const formatMentionNode = (txt, key)=> (
-  <Text key={key} style={styles.mention}>
+  <TouchableOpacity key={key}  onPress={() => {}}>
+    <Text style={styles.mention}>
       {txt}
-  </Text>
-)
+    </Text>
+  </TouchableOpacity>
+);
 
-<Text style={styles.messageText}>
-    {displayTextWithMentions(message.text, formatMentionNode)}
-</Text>
+const style = {
+  letterSpacing: 0,
+  color: '#595959',
+  paddingTop: 10
+};
+
+<View style={styles.messageText}>
+  {displayTextWithMentions(message.text, formatMentionNode, style)}
+</View>
 ```
 ## How it works 
 

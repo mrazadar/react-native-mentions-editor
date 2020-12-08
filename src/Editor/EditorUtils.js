@@ -1,9 +1,11 @@
+import { Text } from 'react-native';
+
 /**
  * EditorUtils contains helper
  * functions for our Editor
  */
 
-export const displayTextWithMentions = (inputText, formatMentionNode) => {
+export const displayTextWithMentions = (inputText, formatMentionNode, style) => {
   /**
    * Use this function to parse mentions markup @[username](id) in the string value.
    */
@@ -17,7 +19,7 @@ export const displayTextWithMentions = (inputText, formatMentionNode) => {
       mentions.forEach((men, index) => {
         const initialStr = retLine.substring(lastIndex, men.start);
         lastIndex = men.end + 1;
-        formattedText.push(initialStr);
+        formattedText.push(<Text style={style}>{initialStr}</Text>);
         const formattedMention = formatMentionNode(
           `@${men.username}`,
           `${index}-${men.id}-${rowIndex}`
@@ -25,13 +27,13 @@ export const displayTextWithMentions = (inputText, formatMentionNode) => {
         formattedText.push(formattedMention);
         if (mentions.length - 1 === index) {
           const lastStr = retLine.substr(lastIndex); //remaining string
-          formattedText.push(lastStr);
+          formattedText.push(<Text style={style}>{lastStr}</Text>);
         }
       });
     } else {
-      formattedText.push(retLine);
+      formattedText.push(<Text style={style}>{retLine}</Text>);
     }
-    formattedText.push("\n");
+    formattedText.push(<Text style={style}>{'\n'}</Text>);
   });
   return formattedText;
 };
