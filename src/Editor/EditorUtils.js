@@ -1,4 +1,4 @@
-import { Text } from 'react-native';
+import React, { Text } from 'react-native';
 
 /**
  * EditorUtils contains helper
