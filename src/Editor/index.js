@@ -379,9 +379,21 @@ export class Editor extends React.Component {
   }
 
   sendMessageToFooter(text) {
+    const { props, state } = this;
+    const { editorStyles = {} } = props;
+
+    const mentionListProps = {
+      list: props.list,
+      keyword: state.keyword,
+      isTrackingStarted: state.isTrackingStarted,
+      onSuggestionTap: this.onSuggestionTap.bind(this),
+      editorStyles
+    };
+
     this.props.onChange({
       displayText: text,
-      text: this.formatTextWithMentions(text)
+      text: this.formatTextWithMentions(text),
+      mentionProps: mentionListProps
     });
   }
 
@@ -543,13 +555,6 @@ export class Editor extends React.Component {
         />
       )
     )
-    let selection;
-    if (Platform.OS === 'ios') {
-      selection = (this.state.inputText.length >= this.state.selection.start) ?
-        this.state.selection : { start: this.state.inputText.length, end: this.state.inputText.length };
-    } else {
-      selection = { start: this.state.inputText.length, end: this.state.inputText.length };
-    }
     
     return (
       <View styles={editorStyles.mainContainer}>
@@ -576,7 +581,6 @@ export class Editor extends React.Component {
                 value={null}
                 onBlur={props.toggleEditor}
                 onChangeText={this.onChange}
-                selection={selection}
                 selectionColor={"#000"}
                 onSelectionChange={this.handleSelectionChange}
                 placeholder={state.placeholder}
