@@ -60,7 +60,7 @@ export class Editor extends React.Component {
       },
       menIndex: 0,
       showMentions: false,
-      editorHeight: 72,
+      editorHeight: this.props.initialEditorHeight ?? 72,
       scrollContentInset: { top: 0, bottom: 0, left: 0, right: 0 },
       placeholder: props.placeholder || "Type something..."
     };
@@ -516,6 +516,7 @@ export class Editor extends React.Component {
      * the size of text in the input.
      */
     if (evt) {
+      
       // const iosTextHeight = 20.5
       const androidTextHeight = 20.5;
       // const textHeight = Platform.OS === 'ios' ? iosTextHeight : androidTextHeight
@@ -525,7 +526,7 @@ export class Editor extends React.Component {
           ? evt.nativeEvent.contentSize.height
           : evt.nativeEvent.contentSize.height - androidTextHeight;
       let editorHeight = 40;
-      editorHeight = editorHeight + height;
+      editorHeight = Math.max(this.props.initialEditorHeight, editorHeight + height);
       this.setState({
         editorHeight
       });
