@@ -144,10 +144,22 @@ export class Editor extends React.Component {
     
   }
 
-  updateSuggestions(lastKeyword) {
+  updateSuggestions(lastKeyword ,list) {
+    const { props, state } = this;
+    const { editorStyles = {} } = props;
+
     this.setState({
       keyword: lastKeyword
     });
+    const mentionListProps = {
+      list: list || props.list,
+      keyword: lastKeyword,
+      isTrackingStarted: state.isTrackingStarted,
+      onSuggestionTap: this.onSuggestionTap.bind(this),
+      editorStyles
+    };
+
+    this.props.onMentionListPropChange && this.props.onMentionListPropChange(mentionListProps)
   }
 
   resetTextbox() {
@@ -292,6 +304,7 @@ export class Editor extends React.Component {
     });
     this.stopTracking();
     this.sendMessageToFooter(text);
+    this.updateSuggestions('' , [])
   };
 
   handleSelectionChange = ({ nativeEvent: { selection } }) => {
@@ -382,18 +395,9 @@ export class Editor extends React.Component {
     const { props, state } = this;
     const { editorStyles = {} } = props;
 
-    const mentionListProps = {
-      list: props.list,
-      keyword: state.keyword,
-      isTrackingStarted: state.isTrackingStarted,
-      onSuggestionTap: this.onSuggestionTap.bind(this),
-      editorStyles
-    };
-
     this.props.onChange({
       displayText: text,
       text: this.formatTextWithMentions(text),
-      mentionProps: mentionListProps
     });
   }
 
