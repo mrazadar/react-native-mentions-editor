@@ -525,8 +525,8 @@ export class Editor extends React.Component {
         Platform.OS === "ios"
           ? evt.nativeEvent.contentSize.height
           : evt.nativeEvent.contentSize.height - androidTextHeight;
-      let editorHeight = 40;
-      editorHeight = Math.max(this.props.initialEditorHeight, editorHeight + height);
+      let editorHeight = 20;
+      editorHeight = Math.max(this.props.initialEditorHeight, editorHeight + height) - 4;
       this.setState({
         editorHeight
       });
@@ -574,7 +574,7 @@ export class Editor extends React.Component {
             }}
             style={[styles.editorContainer, editorStyles.editorContainer]}
           >
-            <View style={[{ height: this.state.editorHeight }]}>              
+            <View style={[{ height: this.state.editorHeight, justifyContent: 'center' }]}>              
               <TextInput
                 onLayout={props.onLayout}
                 ref={input => props.onRef && props.onRef(input)}
