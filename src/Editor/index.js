@@ -28,6 +28,8 @@ export class Editor extends React.Component {
     placeholder: PropTypes.string,
     renderMentionList: PropTypes.func,
     placeMentionListOnBottom: PropTypes.bool,
+    inputExtraHeight: PropTypes.number,
+    autoFocus: PropTypes.bool
   };
 
   constructor(props) {
@@ -525,7 +527,7 @@ export class Editor extends React.Component {
         Platform.OS === "ios"
           ? evt.nativeEvent.contentSize.height
           : evt.nativeEvent.contentSize.height - androidTextHeight;
-      let editorHeight = 50;
+      let editorHeight = 20 + (this.props.inputExtraHeight ?? 0);
       editorHeight = editorHeight + height;
       this.setState({
         editorHeight
@@ -579,8 +581,8 @@ export class Editor extends React.Component {
                 onLayout={props.onLayout}
                 ref={input => props.onRef && props.onRef(input)}
                 style={[styles.input, editorStyles.input]}
-                multiline
-                autoFocus
+                multiline = { true }
+                autoFocus = { this.props.autoFocus }
                 numberOfLines={100}
                 name={"message"}
                 value={null}
